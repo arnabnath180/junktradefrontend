@@ -54,7 +54,7 @@ const deleteItem = (id) => {
       <button type="button" class="btn btn-outline-light" style={{marginRight:'10px'}}
       onClick={()=>{
         localStorage.removeItem('adminauthenticate');
-        navigate('/');
+        navigate('/admin/login');
       }}>Logout</button>
       </div>
     </nav>

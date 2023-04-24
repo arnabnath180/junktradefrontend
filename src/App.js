@@ -9,6 +9,8 @@ import AdminDashboard from './Component/AdminDashboard/Index.js';
 import ScrapItemList from './Component/ScrapItemList/Index.js';
 import RateList from './Component/RateList/Index.js';
 import SellerHome from './Component/SellerHome/Index.js';
+import SellerHistory from './Component/SellerHistory/Index.js';
+import SellerScrapItem from './Component/SellerScrapItem/Index.js';
 function App() {
   return (
     <>
@@ -23,6 +25,8 @@ function App() {
         <Route path='/admin/scrapItem' element={<ScrapItemList/>} ></Route>
         <Route path='/ratelist' element={<RateList/>} ></Route>
         <Route path='/seller/home' element={<SellerHome/>} ></Route>
+        <Route path='/seller/history' element={<SellerHistory/>} ></Route>
+        <Route path='/seller/scrapItem' element={<SellerScrapItem/>} ></Route>
       </Routes>
       </BrowserRouter>
     </>

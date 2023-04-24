@@ -18,8 +18,9 @@ export default function () {
         <div className='login-container'>
             <div className='card login-card shadow-lg p-3 mb-5 bg-white rounded'>
                 <button type="button" class="btn btn-secondary btn-lg sellerbtn"
-                onClick={()=>{navigate('/seller/dashboard')}}>Order</button>
-                <button type="button" class="btn btn-secondary btn-lg sellerbtn">My Orders</button>
+                onClick={()=>{navigate('/seller/dashboard')}}>Sell Scrap</button>
+                <button type="button" class="btn btn-secondary btn-lg sellerbtn"
+                onClick={()=>{navigate('/seller/history')}}>Scrap History</button>
             </div>
         </div> 
     </div>
