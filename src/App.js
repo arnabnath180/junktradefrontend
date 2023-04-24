@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import Home from './Component/HomeScreen/Index.js';
+import Register from './Component/RegisterSeller/Index.js';
+import LoginSeller from './Component/LoginSeller/Index.js';
+import AdminLogin from './Component/LoginAdmin/Index.js';
+import SellerDashboard from './Component/SellerDashboard/Index.js';
+import AdminDashboard from './Component/AdminDashboard/Index.js';
+import ScrapItemList from './Component/ScrapItemList/Index.js';
+import RateList from './Component/RateList/Index.js';
+import SellerHome from './Component/SellerHome/Index.js';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/register' element={<Register/>}></Route>
+        <Route path='/seller/login' element={<LoginSeller/>}></Route>
+        <Route path='/admin/login' element={<AdminLogin/>}></Route>
+        <Route path='/seller/dashboard' element={<SellerDashboard/>}></Route>
+        <Route path='/admin/dashboard' element={<AdminDashboard/>}></Route>
+        <Route path='/admin/scrapItem' element={<ScrapItemList/>} ></Route>
+        <Route path='/ratelist' element={<RateList/>} ></Route>
+        <Route path='/seller/home' element={<SellerHome/>} ></Route>
+      </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
