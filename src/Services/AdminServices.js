@@ -1,24 +1,24 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8001/admin/getScrapItemList/";
-const DELETE_URL = "http://localhost:8001/admin/deleteScrapList/"
+const BASE_URL = "http://192.168.49.2:32063/admin";
+
 
 class AdminService {
 
 loginAdmin(data) {
-    return axios.post("http://localhost:8001/admin/login", data);
+    return axios.post(BASE_URL+"/login", data);
 }
 
 scrapList(config) {
-    return axios.get("http://localhost:8001/admin/getScrapList",config);
+    return axios.get(BASE_URL+"/getScrapList",config);
 }
 
 scrapListItem(scrapId,config) {
-   return axios.get(BASE_URL + scrapId,config);
+   return axios.get(BASE_URL+"/getScrapItemList/" + scrapId,config);
 }
 
 scrapListDelete (scrapId,config) {
-    return axios.delete(`http://localhost:8001/admin/deleteScrapList/${scrapId}`,config);
+    return axios.delete(`${BASE_URL}/deleteScrapList/${scrapId}`,config);
 }
 
 }
