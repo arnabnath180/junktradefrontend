@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: junktradefrontend
-          image: junktradefrontend:1.0
+          image: arnabxyz/junktradefrontend:1.0
           ports:
             - containerPort: 3000
 ---          
@@ -32,5 +32,5 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 31000
-  type: NodePort
+  type: LoadBalancer
 
