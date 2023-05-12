@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import AdminServices from '../../Services/AdminServices'
 import { useNavigate } from 'react-router-dom';
 import './Index.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../State/Index';
+
 export default function () {
   let jwt = null;
   jwt = localStorage.getItem('adminauthenticate');
@@ -11,6 +15,10 @@ export default function () {
           'Authorization': jwt
       }
   };
+  const dispatch=useDispatch();
+  const actions=bindActionCreators(actionCreators,dispatch);
+  const status=useSelector(state=>state.adminStatus);
+  const Email=useSelector(state=>state.adminEmail);
   const [scrapList, setScrapList] = useState([]);
   const navigate = useNavigate();
   const fetchData = () => {
@@ -51,9 +59,14 @@ const deleteItem = (id) => {
    <nav className="navbar navbar-dark bg-dark sell">
       <span className='text-white logo'>Junk Trade</span>
       <div>
+      <span style={{color:'white', fontSize:'20px', marginRight:'5px'}}>Welcome {Email}</span>
       <button type="button" class="btn btn-outline-light" style={{marginRight:'10px'}}
       onClick={()=>{
         localStorage.removeItem('adminauthenticate');
+        localStorage.removeItem('adminLoginStatus');
+        localStorage.removeItem('adminEmail');
+        actions.setAdminEmail(null);
+        actions.setAdminLoginStatus(false);
         navigate('/admin/login');
       }}>Logout</button>
       </div>

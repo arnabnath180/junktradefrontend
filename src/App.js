@@ -11,6 +11,9 @@ import RateList from './Component/RateList/Index.js';
 import SellerHome from './Component/SellerHome/Index.js';
 import SellerHistory from './Component/SellerHistory/Index.js';
 import SellerScrapItem from './Component/SellerScrapItem/Index.js';
+import SellerProtected from './Component/SellerProtected';
+import AdminProtected from './Component/AdminProtected';
+
 function App() {
   return (
     <>
@@ -20,13 +23,13 @@ function App() {
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/seller/login' element={<LoginSeller/>}></Route>
         <Route path='/admin/login' element={<AdminLogin/>}></Route>
-        <Route path='/seller/dashboard' element={<SellerDashboard/>}></Route>
-        <Route path='/admin/dashboard' element={<AdminDashboard/>}></Route>
-        <Route path='/admin/scrapItem' element={<ScrapItemList/>} ></Route>
+        <Route path='/seller/dashboard' element={<SellerProtected Component={SellerDashboard}/>}></Route>
+        <Route path='/admin/dashboard' element={<AdminProtected Component={AdminDashboard}/>}></Route>
+        <Route path='/admin/scrapItem' element={<AdminProtected Component={ScrapItemList}/>} ></Route>
         <Route path='/ratelist' element={<RateList/>} ></Route>
-        <Route path='/seller/home' element={<SellerHome/>} ></Route>
-        <Route path='/seller/history' element={<SellerHistory/>} ></Route>
-        <Route path='/seller/scrapItem' element={<SellerScrapItem/>} ></Route>
+        <Route path='/seller/home' element={<SellerProtected Component={SellerHome}/>} ></Route>
+        <Route path='/seller/history' element={<SellerProtected Component={SellerHistory}/>} ></Route>
+        <Route path='/seller/scrapItem' element={<SellerProtected Component={SellerScrapItem}/>} ></Route>
       </Routes>
       </BrowserRouter>
     </>

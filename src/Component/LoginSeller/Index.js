@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
-import SellerServices from '../../Services/SellerServices';
+import SellerServices from '../../Services/SellerServices.js';
 import { useNavigate } from 'react-router-dom';
 import './Index.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators }  from '../../State/Index.js';
+import { bindActionCreators } from 'redux';
+
 export default function () {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
+  const dispatch=useDispatch();
+  const actions=bindActionCreators(actionCreators,dispatch);
   const navigate=useNavigate();
+  const status=useSelector(state=>state.sellerStatus);
+  const Email=useSelector(state=>state.sellerEmail);
   const handleSubmit = (e)=>{
     e.preventDefault();
     SellerServices.loginSeller(
@@ -16,6 +24,10 @@ export default function () {
     ).then((res)=>{
       console.log(res);
       localStorage.setItem("sellerauthenticate", res.data.sellertoken);
+      actions.setSellerLoginStatus(true);
+      actions.setSellerEmail(email);
+      localStorage.setItem('sellerLoginStatus',true);
+      localStorage.setItem('sellerEmail',email);
       navigate('/seller/home');
     }).catch((error)=>{
       alert("Bad Credentials");

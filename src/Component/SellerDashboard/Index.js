@@ -6,6 +6,10 @@ import TimePicker from 'react-bootstrap-time-picker';
 import './Index.css';
 import SellerServices from '../../Services/SellerServices';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators }  from '../../State/Index.js';
+import { bindActionCreators } from 'redux';
+
 export default function () {
   let categories=[
     {'category':'Mix Waste',
@@ -92,6 +96,10 @@ export default function () {
           'Authorization': jwt
       }
   };
+  const dispatch=useDispatch();
+  const actions=bindActionCreators(actionCreators,dispatch);
+  const status=useSelector(state=>state.sellerStatus);
+  const Email=useSelector(state=>state.sellerEmail);
   const navigate=useNavigate();
   const [date, setDate] = useState();
   const [mixWaste,setMixWaste]=useState([false,false,false]);
@@ -118,7 +126,15 @@ export default function () {
   const handleSubmit=async(e)=>{
     e.preventDefault();
     let order={};
+    const today = new Date();
     order["pickupDate"]=date;
+    console.log(today);
+    console.log(date);
+    console.log(date<today);
+    if(date<=today){
+      alert("Date should be greater than current date");
+    }
+    else{
     order["pickupTime"]=time;
     order["addressLine"]=addressLine;
     order["district"]=district;
@@ -210,16 +226,23 @@ export default function () {
     };
 
     alert("Order Successfull");
+    }
     
   }
   return (
-    <div className='dashboard-container'>
+    <div className='dashboard-container' data-testid="seller-dashboard">
     <nav className="navbar navbar-dark bg-dark sell">
       <span className='text-white logo'>Junk Trade</span>
+
       <div>
+      <span style={{color:'white', fontSize:'20px', marginRight:'5px'}}>Welcome {Email}</span>
       <button type="button" class="btn btn-outline-light" style={{marginRight:'10px'}}
       onClick={()=>{
         localStorage.removeItem('sellerauthenticate');
+        localStorage.removeItem('sellerLoginStatus');
+        localStorage.removeItem('sellerEmail');
+        actions.setSellerEmail(null);
+        actions.setSellerLoginStatus(false);
         navigate('/');
       }}>Logout</button>
       </div>

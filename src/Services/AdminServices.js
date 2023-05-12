@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.49.2:32063/admin";
+const BASE_URL = "http://192.168.49.2:32000/admin";
 
 
 class AdminService {

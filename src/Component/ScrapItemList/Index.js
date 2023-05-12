@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AdminServices from '../../Services/AdminServices';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../State/Index';
 
 function Index() {
     
@@ -16,6 +19,10 @@ function Index() {
             'Authorization': jwt
         }
     };
+    const dispatch=useDispatch();
+    const actions=bindActionCreators(actionCreators,dispatch);
+    const status=useSelector(state=>state.adminStatus);
+    const Email=useSelector(state=>state.adminEmail);
     const fetchData = () => {
         AdminServices.scrapListItem(id,config).then((response) => {
           console.log(response.data);
@@ -44,9 +51,14 @@ function Index() {
     <nav className="navbar navbar-dark bg-dark sell">
       <span className='text-white logo'>Junk Trade</span>
       <div>
+      <span style={{color:'white', fontSize:'20px', marginRight:'5px'}}>Welcome {Email}</span>
       <button type="button" class="btn btn-outline-light" style={{marginRight:'10px'}}
       onClick={()=>{
         localStorage.removeItem('adminauthenticate');
+        localStorage.removeItem('adminLoginStatus');
+        localStorage.removeItem('adminEmail');
+        actions.setAdminEmail(null);
+        actions.setAdminLoginStatus(false);
         navigate('/');
       }}>Logout</button>
       </div>

@@ -17,7 +17,7 @@ export default function () {
       "fname":fname,
       "lname":lname,
       "password":password,
-      "phone_number":phNumber
+      "phoneNumber":phNumber
     }).then((res)=>{
       console.log(res);
       setEmail('');

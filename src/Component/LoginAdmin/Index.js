@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import AdminServices from '../../Services/AdminServices';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../State/Index';
 
 export default function () {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
+  const dispatch=useDispatch();
+  const actions=bindActionCreators(actionCreators,dispatch);
+  const status=useSelector(state=>state.adminStatus);
+  const Email=useSelector(state=>state.adminEmail);
   const navigate=useNavigate();
   const handleSubmit = (e)=>{
     e.preventDefault();
@@ -16,6 +23,11 @@ export default function () {
     ).then((res)=>{
       console.log(res);
       localStorage.setItem("adminauthenticate", res.data.admintoken);
+      actions.setAdminLoginStatus(true);
+      actions.setAdminEmail(email);
+
+      localStorage.setItem('adminLoginStatus',true);
+      localStorage.setItem('adminEmail',email);
       navigate('/admin/dashboard');
     }).catch((error)=>{
         alert("Bad Credentials");
